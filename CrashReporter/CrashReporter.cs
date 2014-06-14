@@ -9,10 +9,13 @@ namespace QoSCalc.Common
     /// </summary>
     public class CrashReporter
     {
+        #region Constants
         /// <summary>
         /// Filename in which the report is saved.
         /// </summary>
         private const string CRASH_REPORT_FILENAME = "crash.txt";
+        #endregion
+        #region Properties
         /// <summary>
         /// Filename and FilePath (WorkingDir)
         /// </summary>
@@ -23,7 +26,30 @@ namespace QoSCalc.Common
                 return System.IO.Path.Combine(Environment.CurrentDirectory, CRASH_REPORT_FILENAME);
             }
         }
-
+        /// <summary>
+        /// Get the hole report as string
+        /// </summary>
+        /// <returns>string containing the report or null</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        static public string Report
+        {
+            get
+            {
+                try
+                {
+                    if (CrashReportExist)
+                    {
+                        return System.IO.File.ReadAllText(CrashFilename);
+                    }
+                    else
+                        return null; //no report to copy exist
+                }
+                catch
+                {
+                    return null; //unsuccessfull
+                }
+            }
+        }
         /// <summary>
         /// Indicates that a new Crash report exist
         /// </summary>
@@ -81,7 +107,8 @@ namespace QoSCalc.Common
             get;
             set;
         }
-
+        #endregion
+        #region Methods
         /// <summary>
         /// Constructor
         /// </summary>
@@ -106,7 +133,7 @@ namespace QoSCalc.Common
                     object[] defaultValueAttribute =
                         prop.GetCustomAttributes(typeof(DefaultValueAttribute), true);
 
-                    if (defaultValueAttribute != null)
+                    if (defaultValueAttribute != null && defaultValueAttribute.Length > 0)
                     {
                         DefaultValueAttribute dva =
                             defaultValueAttribute[0] as DefaultValueAttribute;
@@ -117,7 +144,6 @@ namespace QoSCalc.Common
                 }
             }
         }
-
         /// <summary>
         /// Creates a Crash Report containing all informations
         /// </summary>
@@ -147,7 +173,7 @@ namespace QoSCalc.Common
             tw.WriteLine("----------------------------");
             tw.WriteLine("CRASH Report");
             tw.WriteLine("  created at: " + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
-            tw.WriteLine(String.Format("  created by: {0}", source ?? ""));
+            tw.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "  created by: {0}", source ?? ""));
             #endregion header
             if (IncludeException)
             {
@@ -194,5 +220,84 @@ namespace QoSCalc.Common
             tw.Close( );
 
         }
+        #endregion
+        #region static Methods
+        /// <summary>
+        /// Removes the CrashReport
+        /// </summary>
+        static public void RemoveCrashReport ( )
+        {
+            if (CrashReportExist)
+                System.IO.File.Delete(CrashFilename);
+
+
+        }
+        /// <summary>
+        /// saves the report file to specified place
+        /// </summary>
+        /// <param name="path">path to save at</param>
+        /// <returns>true if successfull</returns>
+        static public bool SaveReport (string path)
+        {
+            return SaveReport(path, CRASH_REPORT_FILENAME);
+        }
+        /// <summary>
+        /// saves the report file to specified place
+        /// </summary>
+        /// <param name="path">path to save at</param>
+        /// <param name="filename">new filename</param>
+        /// <returns>true if successfull</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        static public bool SaveReport (string path, string fileName)
+        {
+            try
+            {
+                if (CrashReportExist)
+                {
+                    System.IO.File.Copy(CrashFilename, System.IO.Path.Combine(path, fileName));
+                    return true;
+                }
+                else
+                    return false; //no report to copy exist
+            }
+            catch
+            {
+                return false; //unsuccessfull
+            }
+        }
+        /// <summary>
+        /// moves the report file to specified place
+        /// </summary>
+        /// <param name="path">path to save at</param>
+        /// <param name="filename">new filename</param>
+        /// <returns>true if successfull</returns>
+        static public bool MoveReport (string path)
+        {
+            return MoveReport(path, CRASH_REPORT_FILENAME);
+        }
+        /// <summary>
+        /// moves the report file to specified place
+        /// </summary>
+        /// <param name="path">path to save at</param>
+        /// <returns>true if successfull</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        static public bool MoveReport (string path, string fileName)
+        {
+            try
+            {
+                if (CrashReportExist && SaveReport(path, fileName))
+                {
+                    RemoveCrashReport( );
+                    return true;
+                }
+                else
+                    return false; //no report to copy exist
+            }
+            catch
+            {
+                return false; //unsuccessfull
+            }
+        }
+        #endregion
     }
 }
