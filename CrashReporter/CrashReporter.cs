@@ -13,7 +13,7 @@ namespace QoSCalc.Common
         /// <summary>
         /// Filename in which the report is saved.
         /// </summary>
-        private const string CRASH_REPORT_FILENAME = "crash.txt";
+        private const string CRASH_REPORT_FILENAME = "crash.xml";
         #endregion
         #region Properties
         /// <summary>
