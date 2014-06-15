@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="saveFileDialogFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 13</value>
-  </data>
   <data name="saveFileDialogFilter.Text" xml:space="preserve">
     <value>xml Dateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*</value>
   </data>
@@ -137,22 +133,26 @@
     <value>Ausnahmen</value>
   </data>
   <data name="tabPageStackTrace.Text" xml:space="preserve">
-    <value>Stack Ablauf</value>
+    <value>Stack-Ablauf</value>
   </data>
   <data name="tabPageEnvironment.Text" xml:space="preserve">
     <value>Umgebung</value>
   </data>
   <data name="tabPageUserAssemblies.Text" xml:space="preserve">
-    <value>Eigene Assemblies</value>
+    <value>Eigene Assemblys</value>
   </data>
   <data name="tabPageAllAssemblies.Text" xml:space="preserve">
-    <value>Alle Assemblies</value>
+    <value>Alle Assemblys</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Bericht zum Anwendungsabsturz</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="saveFileDialogFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 13</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Bericht zum Anwendungs Absturz</value>
   </data>
 </root>
