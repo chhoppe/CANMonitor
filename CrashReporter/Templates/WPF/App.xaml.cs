@@ -20,6 +20,11 @@ namespace QoSCalc.UserInterfaces.WPF
         {
             this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            if (Common.CrashReporter.CrashReportExist)
+            {
+                Common.CrashReporter.ShowMsgBox( );
+                Application.Current.Shutdown( );
+            }
         }
 
         private void CurrentDomain_UnhandledException (object sender, UnhandledExceptionEventArgs e)

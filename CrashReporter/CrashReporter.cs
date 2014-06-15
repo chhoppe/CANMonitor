@@ -9,13 +9,18 @@ namespace QoSCalc.Common
     /// </summary>
     public class CrashReporter
     {
-        #region Constants
+        #region Constants and Variables
         /// <summary>
         /// Filename in which the report is saved.
         /// </summary>
         private const string CRASH_REPORT_FILENAME = "crash.xml";
+        /// <summary>
+        /// Report object for report creation
+        /// </summary>
+        private CrashReport _report;
         #endregion
         #region Properties
+        #region static Report handling
         /// <summary>
         /// Filename and FilePath (WorkingDir)
         /// </summary>
@@ -62,6 +67,8 @@ namespace QoSCalc.Common
                 return false;
             }
         }
+        #endregion
+        #region Includes
         /// <summary>
         /// Enviroment Information will be included in the Report
         /// </summary>
@@ -108,7 +115,29 @@ namespace QoSCalc.Common
             set;
         }
         #endregion
+        #region Creation Parameters
+        /// <summary>
+        /// encounterd Exception to include
+        /// </summary>
+        [DefaultValue(null)]
+        public Exception ReportException
+        {
+            get;
+            set;
+        }
+        /// <summary>
+        /// Reason for creating this Report
+        /// </summary>
+        [DefaultValue(null)]
+        public string ReportReason
+        {
+            get;
+            set;
+        }
+        #endregion
+        #endregion
         #region Methods
+        #region Construction
         /// <summary>
         /// Constructor
         /// </summary>
@@ -143,140 +172,6 @@ namespace QoSCalc.Common
                     }
                 }
             }
-        }
-        /// <summary>
-        /// Creates a Crash Report containing all informations
-        /// </summary>
-        public void CreateCrashReport ( )
-        {
-            GenerateCrashReport(null, null);
-        }
-        /// <summary>
-        /// Creates a Crash Report containing all informations, including the Exceptions that where raised
-        /// </summary>
-        /// <param name="reason">Exceptions to include into the report.</param>
-        public void CreateCrashReport (string reason)
-        {
-            GenerateCrashReport(reason, null);
-        }
-        /// <summary>
-        /// Creates a Crash Report containing all informations, including the Exceptions that where raised
-        /// </summary>
-        /// <param name="exept">Exceptions to include into the report.</param>
-        public void CreateCrashReport (Exception exept)
-        {
-            GenerateCrashReport(null, exept);
-        }
-        /// <summary>
-        /// Creates a Crash Report containing all informations, including the Exceptions that where raised and the source
-        /// </summary>
-        /// <param name="reason">where this crash report is called from</param>
-        /// <param name="exept">Exceptions to include into the report.</param>
-        public void CreateCrashReport (string reason, Exception exept)
-        {
-            GenerateCrashReport(reason, exept);
-        }
-        private void GenerateCrashReport (string reason, Exception exept)
-        {
-            CrashReport cr = new CrashReport( );
-            cr.General = String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        "Created: {0}{1}",
-                        DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture),
-                        Environment.NewLine
-                        );
-
-            cr.General += String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        "Reason: {0}{1}",
-                        reason ?? "",
-                        Environment.NewLine
-                        );
-
-
-            if (IncludeException)
-            {
-                cr.Exceptions = "";
-                Exception tmpexept = exept;
-                while (tmpexept != null)
-                {
-                    cr.Exceptions += String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        "{0}: {1}{2}",
-                        tmpexept.Source ?? "",
-                        tmpexept.Message ?? "",
-                        Environment.NewLine
-                        );
-                    tmpexept = tmpexept.InnerException;
-                }
-
-            }
-            if (IncludeStackTrace)
-            {
-                cr.StackTrace = Environment.StackTrace;
-            }
-            if (IncludeEnvironment)
-            {
-                cr.Environment = "";
-                foreach (var item in typeof(Environment).GetProperties(System.Reflection.BindingFlags.Public |
-                    System.Reflection.BindingFlags.Static))
-                {
-                    if (item.Name != "StackTrace")
-                    {
-                        cr.Environment += String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                            "{0}: {1}{2}",
-                            item.Name ?? "",
-                            item.GetValue(null, null).ToString( ) ?? "",
-                            Environment.NewLine
-                            );
-                    }
-                }
-            }
-            System.Reflection.Assembly[] Assemblies = AppDomain.CurrentDomain.GetAssemblies( );
-            if (IncludeUserAssemblies)
-            {
-                cr.UserAssemblies = "";
-                foreach (System.Reflection.Assembly ass in Assemblies.Where(a => a.FullName.StartsWith("QoSCalc", StringComparison.Ordinal)).ToArray( ))
-                {
-                    cr.UserAssemblies += String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                            "{0}, Loc:{1}{2}",
-                            ass.FullName ?? "",
-                            ass.Location ?? "",
-                            Environment.NewLine
-                            );
-                    foreach (System.Reflection.AssemblyName ass2 in ass.GetReferencedAssemblies( ))
-                    {
-                        cr.UserAssemblies += String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                            "  {0}, Compatible:{1}{2}",
-                            ass2.FullName ?? "",
-                            ass2.VersionCompatibility.ToString( ) ?? "",
-                            Environment.NewLine
-                            );
-                    }
-                }
-            }
-            if (IncludeAllAssemblies)
-            {
-                cr.AllAssemblies = "";
-                foreach (System.Reflection.Assembly ass in Assemblies)
-                {
-                    try
-                    {
-                        cr.AllAssemblies += String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    "{0}, Loc:{1}{2}",
-                    ass.FullName ?? "",
-                    ass.Location ?? "",
-                    Environment.NewLine
-                    );
-                    }
-                    catch (NotSupportedException)
-                    {
-                        cr.AllAssemblies += String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    "{0}{1}",
-                    ass.FullName ?? "",
-                    Environment.NewLine
-                    );
-                    }
-                }
-            }
-            cr.Serialize(CrashFilename);
         }
         #endregion
         #region static Methods
@@ -337,6 +232,9 @@ namespace QoSCalc.Common
                 return false; //unsuccessfull
             }
         }
+        /// <summary>
+        /// Created Dialog for existing Crash Report
+        /// </summary>
         static public void ShowMsgBox ( )
         {
             if (CrashReporter.CrashReportExist)
@@ -348,5 +246,209 @@ namespace QoSCalc.Common
             }
         }
         #endregion
+        #region Creation Starter
+        /// <summary>
+        /// Creates a Crash Report containing all informations
+        /// </summary>
+        public void CreateCrashReport ( )
+        {
+            GenerateCrashReport( );
+        }
+        /// <summary>
+        /// Creates a Crash Report containing all informations, including the Exceptions that where raised
+        /// </summary>
+        /// <param name="reason">Exceptions to include into the report.</param>
+        public void CreateCrashReport (string reason)
+        {
+            ReportReason = reason;
+            GenerateCrashReport( );
+        }
+        /// <summary>
+        /// Creates a Crash Report containing all informations, including the Exceptions that where raised
+        /// </summary>
+        /// <param name="exept">Exceptions to include into the report.</param>
+        public void CreateCrashReport (Exception exept)
+        {
+            ReportException = exept;
+            GenerateCrashReport( );
+        }
+        /// <summary>
+        /// Creates a Crash Report containing all informations, including the Exceptions that where raised and the source
+        /// </summary>
+        /// <param name="reason">where this crash report is called from</param>
+        /// <param name="exept">Exceptions to include into the report.</param>
+        public void CreateCrashReport (string reason, Exception exept)
+        {
+            ReportReason = reason;
+            ReportException = exept;
+            GenerateCrashReport( );
+        }
+        #endregion
+
+        #region Report Generation
+        /// <summary>
+        /// General Exception Infos and generate string
+        /// </summary>
+        /// <returns>string with all neccessery informations</returns>
+        private string GenerateReportGeneral ( )
+        {
+            string reportPart = "";
+            reportPart = "Application Crash Report";
+            reportPart = String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "Created: {0}{1}",
+                        DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture),
+                        Environment.NewLine
+                        );
+
+            reportPart += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "Reason: {0}{1}",
+                        ReportReason ?? "",
+                        Environment.NewLine
+                        );
+            return reportPart;
+        }
+        /// <summary>
+        /// Collect Exception Infos and generate string
+        /// </summary>
+        /// <returns>string with all neccessery informations</returns>
+        private string GenerateReportException ( )
+        {
+            if (!IncludeException)
+                return "";
+
+            string reportPart = "";
+            Exception tmpexept = ReportException;
+
+            while (tmpexept != null)
+            {
+                reportPart += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    "{0}: {1}{2}",
+                    tmpexept.Source ?? "",
+                    tmpexept.Message ?? "",
+                    Environment.NewLine
+                    );
+                tmpexept = tmpexept.InnerException; // next inner exception
+            }
+            return reportPart;
+        }
+        /// <summary>
+        /// Collect Environment Infos and generate string
+        /// </summary>
+        /// <returns>string with all neccessery informations</returns>
+        private string GenerateReportEnvironment ( )
+        {
+            if (!IncludeEnvironment)
+                return "";
+            string reportPart = "";
+
+            foreach (var item in typeof(Environment).GetProperties(System.Reflection.BindingFlags.Public |
+                System.Reflection.BindingFlags.Static))
+            {
+                if (item.Name != "StackTrace")
+                {
+                    reportPart += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}: {1}{2}",
+                        item.Name ?? "",
+                        @item.GetValue(null, null).ToString( ) ?? "",
+                        Environment.NewLine
+                        );
+                }
+            }
+            return reportPart;
+        }
+        /// <summary>
+        /// Collect StackTrace Infos and generate string
+        /// </summary>
+        /// <returns>string with all neccessery informations</returns>
+        private string GenerateReportStackTrace ( )
+        {
+            if (!IncludeStackTrace)
+                return "";
+
+            return Environment.StackTrace;
+        }
+        /// <summary>
+        /// Collect UserAssemblies Infos and generate string
+        /// </summary>
+        /// <returns>string with all neccessery informations</returns>
+        private string GenerateReportUserAssemblies ( )
+        {
+            if (!IncludeUserAssemblies)
+                return "";
+
+            string reportPart = "";
+            System.Reflection.Assembly[] Assemblies = AppDomain.CurrentDomain.GetAssemblies( );
+            foreach (System.Reflection.Assembly ass in Assemblies.Where(a => a.FullName.StartsWith("QoSCalc", StringComparison.Ordinal)).ToArray( ))
+            {
+                reportPart += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}, Loc:{1}{2}",
+                        ass.FullName ?? "",
+                        ass.Location ?? "",
+                        Environment.NewLine
+                        );
+                foreach (System.Reflection.AssemblyName ass2 in ass.GetReferencedAssemblies( ))
+                {
+                    reportPart += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "  {0}, Compatible:{1}{2}",
+                        ass2.FullName ?? "",
+                        ass2.VersionCompatibility.ToString( ) ?? "",
+                        Environment.NewLine
+                        );
+                }
+            }
+            return reportPart;
+        }
+        /// <summary>
+        /// Collect AllAssemblies Infos and generate string
+        /// </summary>
+        /// <returns>string with all neccessery informations</returns>
+        private string GenerateReportAllAssemblies ( )
+        {
+            if (!IncludeAllAssemblies)
+                return "";
+
+            string reportPart = "";
+            System.Reflection.Assembly[] Assemblies = AppDomain.CurrentDomain.GetAssemblies( );
+            foreach (System.Reflection.Assembly ass in Assemblies)
+            {
+                try
+                {
+                    reportPart += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}, Loc:{1}{2}",
+                        ass.FullName ?? "",
+                        ass.Location ?? "",
+                        Environment.NewLine
+                        );
+                }
+                catch (NotSupportedException)
+                {
+                    reportPart += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}{1}",
+                        ass.FullName ?? "",
+                        Environment.NewLine
+                        );
+                }
+            }
+            return reportPart;
+        }
+
+        private void GenerateCrashReport ( )
+        {
+            if (_report == null)
+                _report = new CrashReport( );
+
+            // collect infos
+            _report.General = GenerateReportGeneral( );
+            _report.Exceptions = GenerateReportException( );
+            _report.Environment = GenerateReportEnvironment( );
+            _report.StackTrace = GenerateReportStackTrace( );
+            _report.UserAssemblies = GenerateReportUserAssemblies( );
+            _report.AllAssemblies = GenerateReportAllAssemblies( );
+
+            _report.Serialize(CRASH_REPORT_FILENAME); //write to disk
+        }
+        #endregion
+        #endregion
+
     }
 }

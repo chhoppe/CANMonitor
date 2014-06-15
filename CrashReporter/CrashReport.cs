@@ -6,6 +6,7 @@ namespace QoSCalc.Common
     [Serializable( )]
     public class CrashReport
     {
+        #region Properties
         public string General
         {
             get;
@@ -36,7 +37,7 @@ namespace QoSCalc.Common
             get;
             set;
         }
-
+        #endregion
         #region Serializer
         /// <summary>
         /// Schreiben der Einstellungen auf Festplatte
