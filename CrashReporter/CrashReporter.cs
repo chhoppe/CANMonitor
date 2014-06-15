@@ -348,12 +348,12 @@ namespace QoSCalc.Common
             foreach (var item in typeof(Environment).GetProperties(System.Reflection.BindingFlags.Public |
                 System.Reflection.BindingFlags.Static))
             {
-                if (item.Name != "StackTrace")
+                if (item.Name != "StackTrace" && item.Name != "NewLine")
                 {
                     reportPart += String.Format(System.Globalization.CultureInfo.InvariantCulture,
                         "{0}: {1}{2}",
                         item.Name ?? "",
-                        @item.GetValue(null, null).ToString( ) ?? "",
+                        item.GetValue(null, null).ToString( ) ?? "",
                         Environment.NewLine
                         );
                 }
