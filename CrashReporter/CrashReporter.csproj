@@ -64,6 +64,12 @@
     <EmbeddedResource Include="CrashMsgBox.de.resx">
       <DependentUpon>CrashMsgBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CrashMsgBox.fr.resx">
+      <DependentUpon>CrashMsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrashMsgBox.pl.resx">
+      <DependentUpon>CrashMsgBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CrashMsgBox.resx">
       <DependentUpon>CrashMsgBox.cs</DependentUpon>
       <SubType>Designer</SubType>

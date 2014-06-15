@@ -118,7 +118,7 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="buttonSave.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>Oszczędzać</value>
   </data>
 	<assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
 	<data name="textBoxGeneral.WordWrap" type="System.Boolean, mscorlib">
@@ -144,7 +144,7 @@
     <value>tabPageGeneral</value>
   </data>
 	<data name="buttonIgnore.Text" xml:space="preserve">
-    <value>Ignore</value>
+    <value>Ignorować</value>
   </data>
 	<data name="textBoxExceptions.Location" type="System.Drawing.Point, System.Drawing">
 		<value>5, 6</value>
@@ -199,7 +199,7 @@
 		<value>665, 281</value>
 	</data>
 	<data name="$this.Text" xml:space="preserve">
-    <value>Report on application crash</value>
+    <value>Sprawozdanie w sprawie katastrofy aplikacji</value>
   </data>
 	<data name="&gt;&gt;tabPageUserAssemblies.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -286,13 +286,13 @@
 		<value>True</value>
 	</data>
 	<data name="tabPageGeneral.Text" xml:space="preserve">
-    <value>General</value>
+    <value>Ogólnie</value>
   </data>
 	<data name="saveFileDialogFilter.Location" type="System.Drawing.Point, System.Drawing">
 		<value>94, 269</value>
 	</data>
 	<data name="tabPageUserAssemblies.Text" xml:space="preserve">
-    <value>Own Assemblies</value>
+    <value>Zespoły własny</value>
   </data>
 	<data name="&gt;&gt;tabPageAllAssemblies.Name" xml:space="preserve">
     <value>tabPageAllAssemblies</value>
@@ -421,7 +421,7 @@
 		<value>12, 12</value>
 	</data>
 	<data name="tabPageAllAssemblies.Text" xml:space="preserve">
-    <value>All Assemblies</value>
+    <value>Wszystkie Zespoły</value>
   </data>
 	<data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -496,7 +496,7 @@
     <value>1</value>
   </data>
 	<data name="tabPageExceptions.Text" xml:space="preserve">
-    <value>Exceptions</value>
+    <value>Wyjątek</value>
   </data>
 	<data name="&gt;&gt;tabPageStackTrace.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -538,7 +538,7 @@
 		<value>706, 343</value>
 	</data>
 	<data name="tabPageStackTrace.Text" xml:space="preserve">
-    <value>Stack Trace</value>
+    <value>Ślad stosu</value>
   </data>
 	<data name="&gt;&gt;tabPageEnvironment.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -556,7 +556,7 @@
 		<value>Top, Bottom, Left, Right</value>
 	</data>
 	<data name="tabPageEnvironment.Text" xml:space="preserve">
-    <value>Environment</value>
+    <value>środowisko</value>
   </data>
 	<data name="tabPageExceptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
 		<value>3, 3, 3, 3</value>
@@ -568,7 +568,7 @@
 		<value>3, 3, 3, 3</value>
 	</data>
 	<data name="saveFileDialogFilter.Text" xml:space="preserve">
-    <value>xml Files (*.xml)|*.xml|All Files (*.*)|*.*</value>
+    <value>xml Akta (*.xml)|*.xml|All Akta (*.*)|*.*</value>
   </data>
 	<data name="textBoxUserAssemblies.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
 		<value>Top, Bottom, Left, Right</value>

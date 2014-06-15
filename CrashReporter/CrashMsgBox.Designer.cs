@@ -34,6 +34,7 @@
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
             this.saveFileDialogFilter = new System.Windows.Forms.Label();
             this.textBoxGeneral = new System.Windows.Forms.RichTextBox();
+            this.crashReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonIgnore = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.tabPageExceptions = new System.Windows.Forms.TabPage();
@@ -46,15 +47,14 @@
             this.textBoxUserAssemblies = new System.Windows.Forms.RichTextBox();
             this.tabPageAllAssemblies = new System.Windows.Forms.TabPage();
             this.textBoxAllAssemblies = new System.Windows.Forms.RichTextBox();
-            this.crashReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.crashReportBindingSource)).BeginInit();
             this.tabPageExceptions.SuspendLayout();
             this.tabPageStackTrace.SuspendLayout();
             this.tabPageEnvironment.SuspendLayout();
             this.tabPageUserAssemblies.SuspendLayout();
             this.tabPageAllAssemblies.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.crashReportBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -92,6 +92,10 @@
             this.textBoxGeneral.Name = "textBoxGeneral";
             this.textBoxGeneral.ReadOnly = true;
             this.textBoxGeneral.Click += new System.EventHandler(this.OnBnIngoreClicked);
+            // 
+            // crashReportBindingSource
+            // 
+            this.crashReportBindingSource.DataSource = typeof(QoSCalc.Common.CrashReport);
             // 
             // buttonIgnore
             // 
@@ -177,10 +181,6 @@
             this.textBoxAllAssemblies.Name = "textBoxAllAssemblies";
             this.textBoxAllAssemblies.ReadOnly = true;
             // 
-            // crashReportBindingSource
-            // 
-            this.crashReportBindingSource.DataSource = typeof(QoSCalc.Common.CrashReport);
-            // 
             // CrashMsgBox
             // 
             this.AcceptButton = this.buttonIgnore;
@@ -193,12 +193,12 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneral.ResumeLayout(false);
             this.tabPageGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.crashReportBindingSource)).EndInit();
             this.tabPageExceptions.ResumeLayout(false);
             this.tabPageStackTrace.ResumeLayout(false);
             this.tabPageEnvironment.ResumeLayout(false);
             this.tabPageUserAssemblies.ResumeLayout(false);
             this.tabPageAllAssemblies.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.crashReportBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

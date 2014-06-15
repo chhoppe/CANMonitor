@@ -118,7 +118,7 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="buttonSave.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>Enregistrer</value>
   </data>
 	<assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
 	<data name="textBoxGeneral.WordWrap" type="System.Boolean, mscorlib">
@@ -144,11 +144,8 @@
     <value>tabPageGeneral</value>
   </data>
 	<data name="buttonIgnore.Text" xml:space="preserve">
-    <value>Ignore</value>
+    <value>Ignorer</value>
   </data>
-	<data name="textBoxExceptions.Location" type="System.Drawing.Point, System.Drawing">
-		<value>5, 6</value>
-	</data>
 	<data name="&gt;&gt;textBoxEnvironment.Type" xml:space="preserve">
     <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -167,22 +164,18 @@
 	<data name="&gt;&gt;textBoxAllAssemblies.Parent" xml:space="preserve">
     <value>tabPageAllAssemblies</value>
   </data>
+	<data name="&gt;&gt;tabPageAllAssemblies.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
 	<data name="tabPageUserAssemblies.Location" type="System.Drawing.Point, System.Drawing">
 		<value>4, 22</value>
 	</data>
 	<data name="tabPageStackTrace.Size" type="System.Drawing.Size, System.Drawing">
 		<value>674, 293</value>
 	</data>
-	<assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-	<data name="saveFileDialogFilter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-		<value>NoControl</value>
-	</data>
 	<data name="textBoxStackTrace.WordWrap" type="System.Boolean, mscorlib">
 		<value>False</value>
 	</data>
-	<data name="&gt;&gt;buttonIgnore.Name" xml:space="preserve">
-    <value>buttonIgnore</value>
-  </data>
 	<data name="tabPageExceptions.Location" type="System.Drawing.Point, System.Drawing">
 		<value>4, 22</value>
 	</data>
@@ -198,15 +191,9 @@
 	<data name="textBoxStackTrace.Size" type="System.Drawing.Size, System.Drawing">
 		<value>665, 281</value>
 	</data>
-	<data name="$this.Text" xml:space="preserve">
-    <value>Report on application crash</value>
-  </data>
 	<data name="&gt;&gt;tabPageUserAssemblies.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-	<data name="textBoxUserAssemblies.WordWrap" type="System.Boolean, mscorlib">
-		<value>False</value>
-	</data>
 	<data name="textBoxEnvironment.Size" type="System.Drawing.Size, System.Drawing">
 		<value>665, 281</value>
 	</data>
@@ -249,11 +236,12 @@
 	<data name="&gt;&gt;tabPageAllAssemblies.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+	<assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
 	<data name="tabPageUserAssemblies.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
 		<value>3, 3, 3, 3</value>
 	</data>
-	<data name="buttonIgnore.Location" type="System.Drawing.Point, System.Drawing">
-		<value>512, 264</value>
+	<data name="textBoxExceptions.TabIndex" type="System.Int32, mscorlib">
+		<value>3</value>
 	</data>
 	<data name="&gt;&gt;tabPageUserAssemblies.Parent" xml:space="preserve">
     <value>tabControl1</value>
@@ -285,27 +273,18 @@
 	<data name="saveFileDialogFilter.AutoSize" type="System.Boolean, mscorlib">
 		<value>True</value>
 	</data>
-	<data name="tabPageGeneral.Text" xml:space="preserve">
-    <value>General</value>
+	<data name="&gt;&gt;tabPageExceptions.Name" xml:space="preserve">
+    <value>tabPageExceptions</value>
   </data>
 	<data name="saveFileDialogFilter.Location" type="System.Drawing.Point, System.Drawing">
 		<value>94, 269</value>
 	</data>
-	<data name="tabPageUserAssemblies.Text" xml:space="preserve">
-    <value>Own Assemblies</value>
-  </data>
-	<data name="&gt;&gt;tabPageAllAssemblies.Name" xml:space="preserve">
-    <value>tabPageAllAssemblies</value>
-  </data>
 	<data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
     <value>tabControl1</value>
   </data>
 	<data name="&gt;&gt;buttonSave.Name" xml:space="preserve">
     <value>buttonSave</value>
   </data>
-	<data name="textBoxGeneral.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-		<value>Top, Bottom, Left, Right</value>
-	</data>
 	<data name="tabPageGeneral.TabIndex" type="System.Int32, mscorlib">
 		<value>0</value>
 	</data>
@@ -348,11 +327,11 @@
 	<data name="buttonIgnore.TabIndex" type="System.Int32, mscorlib">
 		<value>1</value>
 	</data>
-	<data name="textBoxAllAssemblies.TabIndex" type="System.Int32, mscorlib">
-		<value>4</value>
-	</data>
 	<data name="textBoxAllAssemblies.Size" type="System.Drawing.Size, System.Drawing">
 		<value>665, 281</value>
+	</data>
+	<data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
+		<value>593, 264</value>
 	</data>
 	<data name="buttonIgnore.Size" type="System.Drawing.Size, System.Drawing">
 		<value>75, 23</value>
@@ -360,9 +339,9 @@
 	<data name="tabPageGeneral.Location" type="System.Drawing.Point, System.Drawing">
 		<value>4, 22</value>
 	</data>
-	<data name="&gt;&gt;tabPageExceptions.Name" xml:space="preserve">
-    <value>tabPageExceptions</value>
-  </data>
+	<data name="textBoxStackTrace.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+		<value>Top, Bottom, Left, Right</value>
+	</data>
 	<data name="&gt;&gt;textBoxAllAssemblies.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -381,9 +360,9 @@
 	<data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
 		<value>75, 23</value>
 	</data>
-	<data name="textBoxExceptions.TabIndex" type="System.Int32, mscorlib">
-		<value>3</value>
-	</data>
+	<data name="&gt;&gt;buttonIgnore.Name" xml:space="preserve">
+    <value>buttonIgnore</value>
+  </data>
 	<data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -393,6 +372,9 @@
 	<data name="textBoxStackTrace.TabIndex" type="System.Int32, mscorlib">
 		<value>4</value>
 	</data>
+	<data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
 	<data name="saveFileDialogFilter.Visible" type="System.Boolean, mscorlib">
 		<value>False</value>
 	</data>
@@ -411,24 +393,18 @@
 	<data name="&gt;&gt;textBoxUserAssemblies.Parent" xml:space="preserve">
     <value>tabPageUserAssemblies</value>
   </data>
-	<data name="textBoxStackTrace.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-		<value>Top, Bottom, Left, Right</value>
-	</data>
 	<data name="tabPageExceptions.TabIndex" type="System.Int32, mscorlib">
 		<value>1</value>
 	</data>
 	<data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
 		<value>12, 12</value>
 	</data>
-	<data name="tabPageAllAssemblies.Text" xml:space="preserve">
-    <value>All Assemblies</value>
-  </data>
 	<data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-	<data name="&gt;&gt;tabPageEnvironment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+	<data name="textBoxUserAssemblies.WordWrap" type="System.Boolean, mscorlib">
+		<value>False</value>
+	</data>
 	<data name="&gt;&gt;tabPageGeneral.Name" xml:space="preserve">
     <value>tabPageGeneral</value>
   </data>
@@ -450,8 +426,8 @@
 	<data name="&gt;&gt;buttonIgnore.Parent" xml:space="preserve">
     <value>tabPageGeneral</value>
   </data>
-	<data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-		<value>593, 264</value>
+	<data name="buttonIgnore.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+		<value>NoControl</value>
 	</data>
 	<data name="&gt;&gt;tabPageGeneral.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -459,12 +435,15 @@
 	<data name="textBoxGeneral.Location" type="System.Drawing.Point, System.Drawing">
 		<value>3, 6</value>
 	</data>
-	<data name="textBoxEnvironment.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-		<value>Top, Bottom, Left, Right</value>
-	</data>
 	<data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+	<data name="textBoxEnvironment.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+		<value>Top, Bottom, Left, Right</value>
+	</data>
+	<data name="textBoxAllAssemblies.Location" type="System.Drawing.Point, System.Drawing">
+		<value>5, 6</value>
+	</data>
 	<data name="&gt;&gt;tabPageGeneral.Parent" xml:space="preserve">
     <value>tabControl1</value>
   </data>
@@ -474,9 +453,9 @@
 	<data name="&gt;&gt;tabPageEnvironment.Name" xml:space="preserve">
     <value>tabPageEnvironment</value>
   </data>
-	<data name="textBoxAllAssemblies.Location" type="System.Drawing.Point, System.Drawing">
-		<value>5, 6</value>
-	</data>
+	<data name="&gt;&gt;tabPageAllAssemblies.Name" xml:space="preserve">
+    <value>tabPageAllAssemblies</value>
+  </data>
 	<data name="&gt;&gt;saveFileDialogFilter.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -485,6 +464,9 @@
 	</data>
 	<data name="&gt;&gt;textBoxStackTrace.Name" xml:space="preserve">
     <value>textBoxStackTrace</value>
+  </data>
+	<data name="&gt;&gt;tabPageEnvironment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 	<data name="textBoxExceptions.WordWrap" type="System.Boolean, mscorlib">
 		<value>False</value>
@@ -495,15 +477,15 @@
 	<data name="&gt;&gt;tabPageExceptions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-	<data name="tabPageExceptions.Text" xml:space="preserve">
-    <value>Exceptions</value>
-  </data>
 	<data name="&gt;&gt;tabPageStackTrace.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 	<data name="&gt;&gt;textBoxStackTrace.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+	<data name="saveFileDialogFilter.TabIndex" type="System.Int32, mscorlib">
+		<value>1</value>
+	</data>
 	<data name="textBoxUserAssemblies.Size" type="System.Drawing.Size, System.Drawing">
 		<value>665, 281</value>
 	</data>
@@ -513,12 +495,9 @@
 	<data name="&gt;&gt;saveFileDialogFilter.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-	<data name="saveFileDialogFilter.TabIndex" type="System.Int32, mscorlib">
-		<value>1</value>
+	<data name="saveFileDialogFilter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+		<value>NoControl</value>
 	</data>
-	<data name="&gt;&gt;buttonIgnore.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
 	<data name="tabPageAllAssemblies.Size" type="System.Drawing.Size, System.Drawing">
 		<value>674, 293</value>
 	</data>
@@ -528,17 +507,17 @@
 	<data name="&gt;&gt;textBoxStackTrace.Parent" xml:space="preserve">
     <value>tabPageStackTrace</value>
   </data>
-	<data name="buttonIgnore.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-		<value>NoControl</value>
+	<data name="textBoxExceptions.Location" type="System.Drawing.Point, System.Drawing">
+		<value>5, 6</value>
 	</data>
-	<data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
+	<data name="textBoxGeneral.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+		<value>Top, Bottom, Left, Right</value>
+	</data>
 	<data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
 		<value>706, 343</value>
 	</data>
-	<data name="tabPageStackTrace.Text" xml:space="preserve">
-    <value>Stack Trace</value>
+	<data name="&gt;&gt;buttonIgnore.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
 	<data name="&gt;&gt;tabPageEnvironment.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -546,18 +525,18 @@
 	<data name="tabPageEnvironment.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
 		<value>3, 3, 3, 3</value>
 	</data>
-	<data name="&gt;&gt;tabPageAllAssemblies.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
+	<data name="buttonIgnore.Location" type="System.Drawing.Point, System.Drawing">
+		<value>512, 264</value>
+	</data>
 	<data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
 		<value>682, 319</value>
 	</data>
 	<data name="textBoxExceptions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
 		<value>Top, Bottom, Left, Right</value>
 	</data>
-	<data name="tabPageEnvironment.Text" xml:space="preserve">
-    <value>Environment</value>
-  </data>
+	<data name="textBoxAllAssemblies.TabIndex" type="System.Int32, mscorlib">
+		<value>4</value>
+	</data>
 	<data name="tabPageExceptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
 		<value>3, 3, 3, 3</value>
 	</data>
@@ -567,16 +546,40 @@
 	<data name="tabPageStackTrace.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
 		<value>3, 3, 3, 3</value>
 	</data>
-	<data name="saveFileDialogFilter.Text" xml:space="preserve">
-    <value>xml Files (*.xml)|*.xml|All Files (*.*)|*.*</value>
-  </data>
 	<data name="textBoxUserAssemblies.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
 		<value>Top, Bottom, Left, Right</value>
 	</data>
 	<metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
 		<value>True</value>
 	</metadata>
+	<metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+		<value>de</value>
+	</metadata>
 	<metadata name="crashReportBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
 		<value>17, 17</value>
 	</metadata>
+	<data name="tabPageExceptions.Text" xml:space="preserve">
+		<value>Exceptions</value>
+	</data>
+	<data name="$this.Text" xml:space="preserve">
+		<value>Rapport sur ​​le crash de l'application</value>
+	</data>
+	<data name="tabPageGeneral.Text" xml:space="preserve">
+		<value>Général</value>
+	</data>
+	<data name="tabPageUserAssemblies.Text" xml:space="preserve">
+		<value>Vous assemblys</value>
+	</data>
+	<data name="tabPageAllAssemblies.Text" xml:space="preserve">
+		<value>tous les assemblys</value>
+	</data>
+	<data name="tabPageStackTrace.Text" xml:space="preserve">
+		<value>Trace de la pile</value>
+	</data>
+	<data name="tabPageEnvironment.Text" xml:space="preserve">
+		<value>Environnement</value>
+	</data>
+	<data name="saveFileDialogFilter.Text" xml:space="preserve">
+		<value>xml Fichiers (*.xml)|*.xml|Alle Fichiers (*.*)|*.*</value>
+	</data>
 </root>
