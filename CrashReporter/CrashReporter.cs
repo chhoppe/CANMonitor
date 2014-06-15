@@ -15,6 +15,10 @@ namespace QoSCalc.Common
         /// </summary>
         private const string CRASH_REPORT_FILENAME = "crash.xml";
         /// <summary>
+        /// To identify all assemblies belonging to the solution
+        /// </summary>
+        private const string OWN_ASSEMBLY_NAME_BEGIN = "QoSCalc";
+        /// <summary>
         /// Report object for report creation
         /// </summary>
         private CrashReport _report;
@@ -378,7 +382,7 @@ namespace QoSCalc.Common
 
             string reportPart = "";
             System.Reflection.Assembly[] Assemblies = AppDomain.CurrentDomain.GetAssemblies( );
-            foreach (System.Reflection.Assembly ass in Assemblies.Where(a => a.FullName.StartsWith("QoSCalc", StringComparison.Ordinal)).ToArray( ))
+            foreach (System.Reflection.Assembly ass in Assemblies.Where(a => a.FullName.StartsWith(OWN_ASSEMBLY_NAME_BEGIN, StringComparison.Ordinal)).ToArray( ))
             {
                 reportPart += String.Format(System.Globalization.CultureInfo.InvariantCulture,
                         "{0}, Loc:{1}{2}",
