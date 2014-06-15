@@ -31,7 +31,7 @@ namespace QoSCalc.Common
         /// </summary>
         /// <returns>string containing the report or null</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        static public string Report
+        static public CrashReport Report
         {
             get
             {
@@ -39,7 +39,7 @@ namespace QoSCalc.Common
                 {
                     if (CrashReportExist)
                     {
-                        return System.IO.File.ReadAllText(CrashFilename);
+                        return CrashReport.Deserialize(CrashFilename);
                     }
                     else
                         return null; //no report to copy exist
@@ -66,7 +66,7 @@ namespace QoSCalc.Common
         /// Enviroment Information will be included in the Report
         /// </summary>
         [DefaultValue(true)]
-        public bool IncludeEnviroment
+        public bool IncludeEnvironment
         {
             get;
             set;
@@ -149,76 +149,134 @@ namespace QoSCalc.Common
         /// </summary>
         public void CreateCrashReport ( )
         {
-            CreateCrashReport(null, null);
+            GenerateCrashReport(null, null);
         }
         /// <summary>
         /// Creates a Crash Report containing all informations, including the Exceptions that where raised
         /// </summary>
-        /// <param name="e">Exceptions to include into the report.</param>
+        /// <param name="reason">Exceptions to include into the report.</param>
+        public void CreateCrashReport (string reason)
+        {
+            GenerateCrashReport(reason, null);
+        }
+        /// <summary>
+        /// Creates a Crash Report containing all informations, including the Exceptions that where raised
+        /// </summary>
+        /// <param name="exept">Exceptions to include into the report.</param>
         public void CreateCrashReport (Exception exept)
         {
-            CreateCrashReport(null, exept);
+            GenerateCrashReport(null, exept);
         }
         /// <summary>
         /// Creates a Crash Report containing all informations, including the Exceptions that where raised and the source
         /// </summary>
-        /// <param name="source">where this crash report is called from</param>
+        /// <param name="reason">where this crash report is called from</param>
         /// <param name="exept">Exceptions to include into the report.</param>
-        public void CreateCrashReport (string source, Exception exept)
+        public void CreateCrashReport (string reason, Exception exept)
         {
-            Exception tmpexept = exept;
-            System.IO.TextWriter tw = new System.IO.StreamWriter(CrashFilename, true);
-            #region header
-            tw.WriteLine("----------------------------");
-            tw.WriteLine("----------------------------");
-            tw.WriteLine("CRASH Report");
-            tw.WriteLine("  created at: " + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
-            tw.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "  created by: {0}", source ?? ""));
-            #endregion header
+            GenerateCrashReport(reason, exept);
+        }
+        private void GenerateCrashReport (string reason, Exception exept)
+        {
+            CrashReport cr = new CrashReport( );
+            cr.General = String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "Created: {0}{1}",
+                        DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture),
+                        Environment.NewLine
+                        );
+
+            cr.General += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "Reason: {0}{1}",
+                        reason ?? "",
+                        Environment.NewLine
+                        );
+
+
             if (IncludeException)
             {
-                tw.WriteLine("----------------------------");
-                tw.WriteLine("Exceptionlist");
+                cr.Exceptions = "";
+                Exception tmpexept = exept;
                 while (tmpexept != null)
                 {
-                    tw.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "  {0}: {1}", tmpexept.Source ?? "", tmpexept.Message ?? ""));
+                    cr.Exceptions += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        "{0}: {1}{2}",
+                        tmpexept.Source ?? "",
+                        tmpexept.Message ?? "",
+                        Environment.NewLine
+                        );
                     tmpexept = tmpexept.InnerException;
                 }
+
             }
             if (IncludeStackTrace)
             {
-                tw.WriteLine("----------------------------");
-                tw.WriteLine("StackTrace");
-                tw.WriteLine(Environment.StackTrace);
+                cr.StackTrace = Environment.StackTrace;
+            }
+            if (IncludeEnvironment)
+            {
+                cr.Environment = "";
+                foreach (var item in typeof(Environment).GetProperties(System.Reflection.BindingFlags.Public |
+                    System.Reflection.BindingFlags.Static))
+                {
+                    if (item.Name != "StackTrace")
+                    {
+                        cr.Environment += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                            "{0}: {1}{2}",
+                            item.Name ?? "",
+                            item.GetValue(null, null).ToString( ) ?? "",
+                            Environment.NewLine
+                            );
+                    }
+                }
             }
             System.Reflection.Assembly[] Assemblies = AppDomain.CurrentDomain.GetAssemblies( );
             if (IncludeUserAssemblies)
             {
-                tw.WriteLine("----------------------------");
-                tw.WriteLine("Used User Assemblies:");
+                cr.UserAssemblies = "";
                 foreach (System.Reflection.Assembly ass in Assemblies.Where(a => a.FullName.StartsWith("QoSCalc", StringComparison.Ordinal)).ToArray( ))
                 {
-                    tw.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "  {0}, Loc:{1}", ass.FullName ?? "", ass.Location ?? ""));
+                    cr.UserAssemblies += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                            "{0}, Loc:{1}{2}",
+                            ass.FullName ?? "",
+                            ass.Location ?? "",
+                            Environment.NewLine
+                            );
                     foreach (System.Reflection.AssemblyName ass2 in ass.GetReferencedAssemblies( ))
                     {
-                        tw.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "    {0}, Compatible:{1}", ass2.FullName ?? "", ass2.VersionCompatibility.ToString( ) ?? ""));
+                        cr.UserAssemblies += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                            "  {0}, Compatible:{1}{2}",
+                            ass2.FullName ?? "",
+                            ass2.VersionCompatibility.ToString( ) ?? "",
+                            Environment.NewLine
+                            );
                     }
                 }
             }
             if (IncludeAllAssemblies)
             {
-                tw.WriteLine("----------------------------");
-                tw.WriteLine("All Assemblies:");
+                cr.AllAssemblies = "";
                 foreach (System.Reflection.Assembly ass in Assemblies)
                 {
-                    tw.WriteLine(String.Format(System.Globalization.CultureInfo.InvariantCulture, "  {0}, Loc:{1}", ass.FullName ?? "", ass.Location ?? ""));
+                    try
+                    {
+                        cr.AllAssemblies += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    "{0}, Loc:{1}{2}",
+                    ass.FullName ?? "",
+                    ass.Location ?? "",
+                    Environment.NewLine
+                    );
+                    }
+                    catch (NotSupportedException)
+                    {
+                        cr.AllAssemblies += String.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    "{0}{1}",
+                    ass.FullName ?? "",
+                    Environment.NewLine
+                    );
+                    }
                 }
             }
-
-            tw.WriteLine( );
-            tw.Flush( );
-            tw.Close( );
-
+            cr.Serialize(CrashFilename);
         }
         #endregion
         #region static Methods
@@ -232,29 +290,20 @@ namespace QoSCalc.Common
 
 
         }
+
         /// <summary>
         /// saves the report file to specified place
         /// </summary>
-        /// <param name="path">path to save at</param>
-        /// <returns>true if successfull</returns>
-        static public bool SaveReport (string path)
-        {
-            return SaveReport(path, CRASH_REPORT_FILENAME);
-        }
-        /// <summary>
-        /// saves the report file to specified place
-        /// </summary>
-        /// <param name="path">path to save at</param>
         /// <param name="filename">new filename</param>
         /// <returns>true if successfull</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        static public bool SaveReport (string path, string fileName)
+        static public bool SaveReport (string fileName)
         {
             try
             {
                 if (CrashReportExist)
                 {
-                    System.IO.File.Copy(CrashFilename, System.IO.Path.Combine(path, fileName));
+                    System.IO.File.Copy(CrashFilename, fileName);
                     return true;
                 }
                 else
@@ -268,24 +317,14 @@ namespace QoSCalc.Common
         /// <summary>
         /// moves the report file to specified place
         /// </summary>
-        /// <param name="path">path to save at</param>
-        /// <param name="filename">new filename</param>
-        /// <returns>true if successfull</returns>
-        static public bool MoveReport (string path)
-        {
-            return MoveReport(path, CRASH_REPORT_FILENAME);
-        }
-        /// <summary>
-        /// moves the report file to specified place
-        /// </summary>
-        /// <param name="path">path to save at</param>
+        /// <param name="fileName">path to save at</param>
         /// <returns>true if successfull</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        static public bool MoveReport (string path, string fileName)
+        static public bool MoveReport (string fileName)
         {
             try
             {
-                if (CrashReportExist && SaveReport(path, fileName))
+                if (CrashReportExist && SaveReport(fileName))
                 {
                     RemoveCrashReport( );
                     return true;
@@ -296,6 +335,16 @@ namespace QoSCalc.Common
             catch
             {
                 return false; //unsuccessfull
+            }
+        }
+        static public void ShowMsgBox ( )
+        {
+            if (CrashReporter.CrashReportExist)
+            {
+                using (var msgbox = new CrashMsgBox( ))
+                {
+                    msgbox.ShowDialog( );
+                }
             }
         }
         #endregion

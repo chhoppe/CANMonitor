@@ -7,7 +7,7 @@
     <ProjectGuid>{9371E3AC-68AD-4D3A-8953-527AE57047BD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QoSCalc.Common.CrashReporter</RootNamespace>
+    <RootNamespace>QoSCalc.Common</RootNamespace>
     <AssemblyName>QoSCalc.Common.CrashReporter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,15 +42,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrashMsgBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrashMsgBox.Designer.cs">
+      <DependentUpon>CrashMsgBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CrashReport.cs" />
     <Compile Include="CrashReporter.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\DataSources\CrashReport.datasource" />
     <None Include="Templates\WPF\App.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Templates\WPF\App.xaml">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CrashMsgBox.de.resx">
+      <DependentUpon>CrashMsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrashMsgBox.resx">
+      <DependentUpon>CrashMsgBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
