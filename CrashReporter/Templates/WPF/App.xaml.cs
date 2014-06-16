@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using Shared.Crash;
 
 namespace QoSCalc.UserInterfaces.WPF
 {
@@ -20,9 +21,9 @@ namespace QoSCalc.UserInterfaces.WPF
         {
             this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            if (Common.CrashReporter.CrashReportExist)
+            if (CrashReporter.CrashReportExist)
             {
-                Common.CrashReporter.ShowMsgBox( );
+                CrashReporter.ShowMsgBox( );
                 Application.Current.Shutdown( );
             }
         }

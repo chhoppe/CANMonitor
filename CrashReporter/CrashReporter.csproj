@@ -7,8 +7,8 @@
     <ProjectGuid>{9371E3AC-68AD-4D3A-8953-527AE57047BD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QoSCalc.Common</RootNamespace>
-    <AssemblyName>QoSCalc.Common.CrashReporter</AssemblyName>
+    <RootNamespace>Shared.Crash</RootNamespace>
+    <AssemblyName>Shared.CrashReporter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

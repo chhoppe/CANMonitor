@@ -1,4 +1,4 @@
-﻿namespace QoSCalc.Common
+﻿namespace Shared.Crash
 {
     partial class CrashMsgBox
     {

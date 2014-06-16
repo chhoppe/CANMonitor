@@ -1,7 +1,7 @@
 ﻿
 using System;
 using System.IO;
-namespace QoSCalc.Common
+namespace Shared.Crash
 {
     [Serializable( )]
     public class CrashReport

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace QoSCalc.Common
+namespace Shared.Crash
 {
     public partial class CrashMsgBox : Form
     {

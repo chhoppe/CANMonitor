@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 
-namespace QoSCalc.Common
+namespace Shared.Crash
 {
     /// <summary>
     /// Class to create CrashReport
