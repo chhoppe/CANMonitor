@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Shared.Crash
+namespace LibShared.Crash
 {
     public partial class CrashMsgBox : Form
     {

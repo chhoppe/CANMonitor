@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 
-namespace Shared.Crash
+namespace LibShared.Crash
 {
     /// <summary>
     /// Class to create CrashReport

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{73CE9A70-2C9C-4752-921C-17F763E75B6A}</ProjectGuid>
+    <ProjectGuid>{30C3AA2F-ED68-4340-AB99-A32D6F23EE63}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UUT.CrashReporter</RootNamespace>
@@ -54,8 +54,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\CrashReporter\CrashReporter.csproj">
-      <Project>{9371e3ac-68ad-4d3a-8953-527ae57047bd}</Project>
+    <ProjectReference Include="..\..\CrashReporter\CrashReporter.csproj">
+      <Project>{4b264ce3-e25e-402a-8ec3-ac574d33f8bd}</Project>
       <Name>CrashReporter</Name>
     </ProjectReference>
   </ItemGroup>

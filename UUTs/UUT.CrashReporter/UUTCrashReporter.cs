@@ -1,12 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using LibShared.Crash;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace UUT.Common.CrashReporter
+namespace LibShared.UUT.CrashReporterTest
 {
     [TestClass]
-    public class CrashReporter
+    public class CrashReporterTest
     {
-        private QoSCalc.Common.CrashReporter cr;
+        private CrashReporter cr;
         private Exception exept;
         //ExpectedException
         #region Test Init
@@ -25,13 +26,13 @@ namespace UUT.Common.CrashReporter
         public void TestPreperations ( )
         {
             // Preperation, make sure no files exist at test start
-            if (QoSCalc.Common.CrashReporter.CrashReportExist)
-                QoSCalc.Common.CrashReporter.RemoveCrashReport( );
+            if (CrashReporter.CrashReportExist)
+                CrashReporter.RemoveCrashReport( );
             // check if no report exist in the beginning
-            Assert.IsFalse(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport exist already, cant test creation.");
+            Assert.IsFalse(CrashReporter.CrashReportExist, "CrashReport exist already, cant test creation.");
             System.IO.File.Delete(System.IO.Path.Combine(Environment.CurrentDirectory, "crash2.txt"));
             Assert.IsFalse(System.IO.File.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, "crash2.txt")), "CrashReport copy exist already.");
-            cr = new QoSCalc.Common.CrashReporter( );
+            cr = new CrashReporter( );
 
             exept = new Exception("Level 1 Exception");
             exept.Source = "UUT";
@@ -58,9 +59,9 @@ namespace UUT.Common.CrashReporter
         [AssemblyCleanup( )]
         public static void AssemblyCleanup ( )
         {
-            if (QoSCalc.Common.CrashReporter.CrashReportExist)
-                QoSCalc.Common.CrashReporter.RemoveCrashReport( );
-            Assert.IsFalse(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport could not be deleted.");
+            if (CrashReporter.CrashReportExist)
+                CrashReporter.RemoveCrashReport( );
+            Assert.IsFalse(CrashReporter.CrashReportExist, "CrashReport could not be deleted.");
             System.IO.File.Delete(System.IO.Path.Combine(Environment.CurrentDirectory, "crash2.txt"));
             Assert.IsFalse(System.IO.File.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, "crash2.txt")), "CrashReport copy could not be deleted.");
         }
@@ -72,21 +73,21 @@ namespace UUT.Common.CrashReporter
         {
             // create a simple report and remove it after wards
             cr.CreateCrashReport( );
-            Assert.IsTrue(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport could not be created.");
-            QoSCalc.Common.CrashReporter.RemoveCrashReport( );
-            Assert.IsFalse(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport could not be deleted.");
+            Assert.IsTrue(CrashReporter.CrashReportExist, "CrashReport could not be created.");
+            CrashReporter.RemoveCrashReport( );
+            Assert.IsFalse(CrashReporter.CrashReportExist, "CrashReport could not be deleted.");
 
             // create a report with exceptions 
             cr.CreateCrashReport(exept);
-            Assert.IsTrue(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport+Exception could not be created.");
-            QoSCalc.Common.CrashReporter.RemoveCrashReport( );
-            Assert.IsFalse(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport could not be deleted.");
+            Assert.IsTrue(CrashReporter.CrashReportExist, "CrashReport+Exception could not be created.");
+            CrashReporter.RemoveCrashReport( );
+            Assert.IsFalse(CrashReporter.CrashReportExist, "CrashReport could not be deleted.");
 
             // create a simple report and remove it after wards
             cr.CreateCrashReport("UnitUnderTest", exept);
-            Assert.IsTrue(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport+Excption+Source could not be created.");
-            QoSCalc.Common.CrashReporter.RemoveCrashReport( );
-            Assert.IsFalse(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport could not be deleted.");
+            Assert.IsTrue(CrashReporter.CrashReportExist, "CrashReport+Excption+Source could not be created.");
+            CrashReporter.RemoveCrashReport( );
+            Assert.IsFalse(CrashReporter.CrashReportExist, "CrashReport could not be deleted.");
 
         }
         [TestMethod]
@@ -95,9 +96,9 @@ namespace UUT.Common.CrashReporter
         {
             // create a simple report and remove it after wards
             cr.CreateCrashReport(exept);
-            Assert.IsTrue(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport could not be created.");
+            Assert.IsTrue(CrashReporter.CrashReportExist, "CrashReport could not be created.");
 
-            QoSCalc.Common.CrashReporter.SaveReport(System.IO.Path.Combine(Environment.CurrentDirectory, "crash2.txt"));
+            CrashReporter.SaveReport(System.IO.Path.Combine(Environment.CurrentDirectory, "crash2.txt"));
             Assert.IsTrue(System.IO.File.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, "crash2.txt")), "CrashReport not saved in target location.");
         }
         [TestMethod]
@@ -106,9 +107,9 @@ namespace UUT.Common.CrashReporter
         {
             // create a simple report and remove it after wards
             cr.CreateCrashReport(exept);
-            Assert.IsTrue(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport could not be created.");
+            Assert.IsTrue(CrashReporter.CrashReportExist, "CrashReport could not be created.");
 
-            QoSCalc.Common.CrashReporter.MoveReport(System.IO.Path.Combine(Environment.CurrentDirectory, "crash2.txt"));
+            CrashReporter.MoveReport(System.IO.Path.Combine(Environment.CurrentDirectory, "crash2.txt"));
             Assert.IsTrue(System.IO.File.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, "crash2.txt")), "CrashReport not saved in target location.");
 
         }
@@ -118,9 +119,9 @@ namespace UUT.Common.CrashReporter
         {
             // create a simple report and remove it after wards
             cr.CreateCrashReport(exept);
-            Assert.IsTrue(QoSCalc.Common.CrashReporter.CrashReportExist, "CrashReport could not be created.");
+            Assert.IsTrue(CrashReporter.CrashReportExist, "CrashReport could not be created.");
 
-            QoSCalc.Common.CrashReport report = QoSCalc.Common.CrashReporter.Report;
+            CrashReport report = CrashReporter.Report;
 
         }
         #endregion

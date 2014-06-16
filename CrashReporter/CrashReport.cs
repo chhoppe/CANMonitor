@@ -1,7 +1,7 @@
 ﻿
 using System;
 using System.IO;
-namespace Shared.Crash
+namespace LibShared.Crash
 {
     [Serializable( )]
     public class CrashReport

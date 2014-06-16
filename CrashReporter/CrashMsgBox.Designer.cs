@@ -1,4 +1,4 @@
-﻿namespace Shared.Crash
+﻿namespace LibShared.Crash
 {
     partial class CrashMsgBox
     {
@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent ( )
         {
-            this.components = new System.ComponentModel.Container();
+            this.components = new System.ComponentModel.Container( );
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrashMsgBox));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPageGeneral = new System.Windows.Forms.TabPage();
-            this.saveFileDialogFilter = new System.Windows.Forms.Label();
-            this.textBoxGeneral = new System.Windows.Forms.RichTextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl( );
+            this.tabPageGeneral = new System.Windows.Forms.TabPage( );
+            this.saveFileDialogFilter = new System.Windows.Forms.Label( );
+            this.textBoxGeneral = new System.Windows.Forms.RichTextBox( );
             this.crashReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.buttonIgnore = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.tabPageExceptions = new System.Windows.Forms.TabPage();
-            this.textBoxExceptions = new System.Windows.Forms.RichTextBox();
-            this.tabPageStackTrace = new System.Windows.Forms.TabPage();
-            this.textBoxStackTrace = new System.Windows.Forms.RichTextBox();
-            this.tabPageEnvironment = new System.Windows.Forms.TabPage();
-            this.textBoxEnvironment = new System.Windows.Forms.RichTextBox();
-            this.tabPageUserAssemblies = new System.Windows.Forms.TabPage();
-            this.textBoxUserAssemblies = new System.Windows.Forms.RichTextBox();
-            this.tabPageAllAssemblies = new System.Windows.Forms.TabPage();
-            this.textBoxAllAssemblies = new System.Windows.Forms.RichTextBox();
-            this.tabControl1.SuspendLayout();
-            this.tabPageGeneral.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.crashReportBindingSource)).BeginInit();
-            this.tabPageExceptions.SuspendLayout();
-            this.tabPageStackTrace.SuspendLayout();
-            this.tabPageEnvironment.SuspendLayout();
-            this.tabPageUserAssemblies.SuspendLayout();
-            this.tabPageAllAssemblies.SuspendLayout();
-            this.SuspendLayout();
+            this.buttonIgnore = new System.Windows.Forms.Button( );
+            this.buttonSave = new System.Windows.Forms.Button( );
+            this.tabPageExceptions = new System.Windows.Forms.TabPage( );
+            this.textBoxExceptions = new System.Windows.Forms.RichTextBox( );
+            this.tabPageStackTrace = new System.Windows.Forms.TabPage( );
+            this.textBoxStackTrace = new System.Windows.Forms.RichTextBox( );
+            this.tabPageEnvironment = new System.Windows.Forms.TabPage( );
+            this.textBoxEnvironment = new System.Windows.Forms.RichTextBox( );
+            this.tabPageUserAssemblies = new System.Windows.Forms.TabPage( );
+            this.textBoxUserAssemblies = new System.Windows.Forms.RichTextBox( );
+            this.tabPageAllAssemblies = new System.Windows.Forms.TabPage( );
+            this.textBoxAllAssemblies = new System.Windows.Forms.RichTextBox( );
+            this.tabControl1.SuspendLayout( );
+            this.tabPageGeneral.SuspendLayout( );
+            ((System.ComponentModel.ISupportInitialize)(this.crashReportBindingSource)).BeginInit( );
+            this.tabPageExceptions.SuspendLayout( );
+            this.tabPageStackTrace.SuspendLayout( );
+            this.tabPageEnvironment.SuspendLayout( );
+            this.tabPageUserAssemblies.SuspendLayout( );
+            this.tabPageAllAssemblies.SuspendLayout( );
+            this.SuspendLayout( );
             // 
             // tabControl1
             // 
@@ -95,7 +95,7 @@
             // 
             // crashReportBindingSource
             // 
-            this.crashReportBindingSource.DataSource = typeof(QoSCalc.Common.CrashReport);
+            this.crashReportBindingSource.DataSource = typeof(LibShared.Crash.CrashReport);
             // 
             // buttonIgnore
             // 
@@ -192,8 +192,8 @@
             this.Load += new System.EventHandler(this.Form_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneral.ResumeLayout(false);
-            this.tabPageGeneral.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.crashReportBindingSource)).EndInit();
+            this.tabPageGeneral.PerformLayout( );
+            ((System.ComponentModel.ISupportInitialize)(this.crashReportBindingSource)).EndInit( );
             this.tabPageExceptions.ResumeLayout(false);
             this.tabPageStackTrace.ResumeLayout(false);
             this.tabPageEnvironment.ResumeLayout(false);
