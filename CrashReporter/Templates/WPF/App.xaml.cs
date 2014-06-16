@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
+﻿using LibShared.Crash;
+using System;
 using System.Windows;
-using Shared.Crash;
 
-namespace QoSCalc.UserInterfaces.WPF
+namespace QoSCalc.UserInterfaces.WpfApplication1
 {
     /// <summary>
     /// Interaktionslogik für "App.xaml"
     /// </summary>
     public partial class App : Application
     {
-        public static Options Opt;
-        public static Progress Progr;
 
-        public App()
-            :base()
+        public App ( )
+            : base( )
         {
             this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
@@ -26,17 +20,24 @@ namespace QoSCalc.UserInterfaces.WPF
                 CrashReporter.ShowMsgBox( );
                 Application.Current.Shutdown( );
             }
+
         }
 
-        private void CurrentDomain_UnhandledException (object sender, UnhandledExceptionEventArgs e)
+        /// <summary>
+        /// Catch unhandled exceptions thrown on the main UI thread  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="exEventArgs"></param>
+        private void CurrentDomain_UnhandledException (object sender, UnhandledExceptionEventArgs exEventArgs)
         {
-            if (e.ExceptionObject == null)
+            if (exEventArgs.ExceptionObject == null)
             {
-                Application.Current.Shutdown();
+                Application.Current.Shutdown( );
                 return;
             }
-            Exception ex = (Exception)e.ExceptionObject;
-            PrintCrashReport("CurrentDomain_UnhandledException", ex);
+            Exception exept = (Exception)exEventArgs.ExceptionObject;
+            new CrashReporter( ).CreateCrashReport("CurrentDomain_UnhandledException", exept);
+            Application.Current.Shutdown( );
         }
 
         /// <summary>
@@ -44,16 +45,17 @@ namespace QoSCalc.UserInterfaces.WPF
         /// option for user to continue program. 
         /// The OnDispatcherUnhandledException method below for AppDomain.UnhandledException will handle all other exceptions thrown by any thread.
         /// </summary>
-        void AppUI_DispatcherUnhandledException (object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        void AppUI_DispatcherUnhandledException (object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs exEventArgs)
         {
-            if (e.Exception == null)
+            exEventArgs.Handled = true;
+            if (exEventArgs.Exception == null)
             {
-                Application.Current.Shutdown();
+                Application.Current.Shutdown( );
                 return;
             }
-            PrintCrashReport("AppUI_DispatcherUnhandledException", e.Exception);
-            Application.Current.Shutdown();
-            e.Handled = true;
+            Exception exept = (Exception)exEventArgs.Exception;
+            new CrashReporter( ).CreateCrashReport("AppUI_DispatcherUnhandledException", exept);
+            Application.Current.Shutdown( );
         }
 
         /// <summary>
@@ -61,19 +63,17 @@ namespace QoSCalc.UserInterfaces.WPF
         /// The above AppUI_DispatcherUnhandledException method for DispatcherUnhandledException will only handle exceptions thrown by the main UI thread. 
         /// Unhandled exceptions caught by this method typically terminate the runtime.
         /// </summary>
-        void OnDispatcherUnhandledException (object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        void OnDispatcherUnhandledException (object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs exEventArgs)
         {
-            if (e.Exception == null)
+            exEventArgs.Handled = true;
+            if (exEventArgs.Exception == null)
             {
-                Application.Current.Shutdown();
+                Application.Current.Shutdown( );
                 return;
             }
-            PrintCrashReport("OnDispatcherUnhandledException", e.Exception);
-            Application.Current.Shutdown();
-            e.Handled = true;
+            Exception exept = (Exception)exEventArgs.Exception;
+            new CrashReporter( ).CreateCrashReport("OnDispatcherUnhandledException", exept);
+            Application.Current.Shutdown( );
         }
-
-
     }
-
 }
