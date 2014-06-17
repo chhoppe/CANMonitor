@@ -42,7 +42,11 @@
     <Compile Include="Class1.cs" />
     <Compile Include="DataStructure\DataValue.cs" />
     <Compile Include="DataStructure\DataValueTypes.cs" />
-    <Compile Include="DataStructure\Temperature.cs" />
+    <Compile Include="DataStructure\ValueVoltage.cs" />
+    <Compile Include="DataStructure\ValueCurrent.cs" />
+    <Compile Include="DataStructure\ValueGeneral.cs" />
+    <Compile Include="DataStructure\TableData.cs" />
+    <Compile Include="DataStructure\ValueTemperature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

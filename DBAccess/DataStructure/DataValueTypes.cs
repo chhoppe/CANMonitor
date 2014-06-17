@@ -6,6 +6,6 @@ namespace CANMonitor.DB.DataStructure
         None = 0,
         Voltage,
         Temperature,
-
+        Current,
     }
 }
