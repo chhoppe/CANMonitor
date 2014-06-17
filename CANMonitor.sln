@@ -3,6 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CANMonitor", "CANMonitor\CANMonitor.csproj", "{079894F6-FFA1-403C-A82B-875DE6EE58DB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{53DC686D-CCAC-4842-AF57-A6A7DABBE0FC}"
+	ProjectSection(SolutionItems) = preProject
+		Shared\LibCodeRules.ruleset = Shared\LibCodeRules.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UUTs", "UUTs", "{B378681C-9572-4E88-87B3-23CF7840E7E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrashReporter", "Shared\CrashReporter\CrashReporter.csproj", "{4B264CE3-E25E-402A-8EC3-AC574D33F8BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UUT.CrashReporter", "Shared\UUTs\UUT.CrashReporter\UUT.CrashReporter.csproj", "{30C3AA2F-ED68-4340-AB99-A32D6F23EE63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CANMonitorCore", "CANMonitorCore\CANMonitorCore.csproj", "{A9DEE6C9-5A74-48D9-90B2-B7720C7E8F67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBAccess", "DBAccess\DBAccess.csproj", "{2980D79B-DCC3-43BC-8896-4AF5D018EDEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,8 +28,29 @@ Global
 		{079894F6-FFA1-403C-A82B-875DE6EE58DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{079894F6-FFA1-403C-A82B-875DE6EE58DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{079894F6-FFA1-403C-A82B-875DE6EE58DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B264CE3-E25E-402A-8EC3-AC574D33F8BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B264CE3-E25E-402A-8EC3-AC574D33F8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B264CE3-E25E-402A-8EC3-AC574D33F8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B264CE3-E25E-402A-8EC3-AC574D33F8BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30C3AA2F-ED68-4340-AB99-A32D6F23EE63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30C3AA2F-ED68-4340-AB99-A32D6F23EE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30C3AA2F-ED68-4340-AB99-A32D6F23EE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30C3AA2F-ED68-4340-AB99-A32D6F23EE63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9DEE6C9-5A74-48D9-90B2-B7720C7E8F67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9DEE6C9-5A74-48D9-90B2-B7720C7E8F67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9DEE6C9-5A74-48D9-90B2-B7720C7E8F67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9DEE6C9-5A74-48D9-90B2-B7720C7E8F67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2980D79B-DCC3-43BC-8896-4AF5D018EDEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2980D79B-DCC3-43BC-8896-4AF5D018EDEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2980D79B-DCC3-43BC-8896-4AF5D018EDEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2980D79B-DCC3-43BC-8896-4AF5D018EDEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B378681C-9572-4E88-87B3-23CF7840E7E4} = {53DC686D-CCAC-4842-AF57-A6A7DABBE0FC}
+		{4B264CE3-E25E-402A-8EC3-AC574D33F8BD} = {53DC686D-CCAC-4842-AF57-A6A7DABBE0FC}
+		{30C3AA2F-ED68-4340-AB99-A32D6F23EE63} = {B378681C-9572-4E88-87B3-23CF7840E7E4}
 	EndGlobalSection
 EndGlobal
