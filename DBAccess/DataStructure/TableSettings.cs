@@ -2,35 +2,29 @@
 
 namespace CANMonitor.DB.DataStructure
 {
-    public class TableData
+    public class TableSettings
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id
-        {
-            get;
-            set;
-        }
 
+        [PrimaryKey]
         public string Name
         {
             get;
             set;
         }
-        public string TimeStamp
+        public string StringValue
         {
             get;
             set;
         }
-        public int Type
+        public double DoubleValue
         {
             get;
             set;
         }
-        public double Value
+        public int IntValue
         {
             get;
             set;
         }
-
     }
 }

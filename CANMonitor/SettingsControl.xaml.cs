@@ -7,6 +7,9 @@ namespace CANMonitor.GUI
     /// </summary>
     public partial class SettingsControl : UserControl
     {
+        public delegate void SettingsFinishedHandler (object sender, bool changed);
+        public event SettingsFinishedHandler SettingsFinished;
+
         static public CANMonitor.DB.Settings Settings
         {
             get
@@ -22,24 +25,25 @@ namespace CANMonitor.GUI
 
         private void ControlLoaded (object sender, System.Windows.RoutedEventArgs e)
         {
-			this.DataContext = Settings;
+            this.DataContext = Settings;
             // TODO: Ereignishandlerimplementierung hier einfügen.
         }
 
-        private void OnBnRevertClicked(object sender, System.Windows.RoutedEventArgs e)
+        private void OnBnRevertClicked (object sender, System.Windows.RoutedEventArgs e)
         {
-        	Settings.Load();
+            Settings.Load( );
         }
 
-        private void OnBnDefaultsClicked(object sender, System.Windows.RoutedEventArgs e)
+        private void OnBnDefaultsClicked (object sender, System.Windows.RoutedEventArgs e)
         {
-        	Settings.LoadDefaults();
+            Settings.LoadDefaults( );
         }
 
-        private void OnBnSaveClicked(object sender, System.Windows.RoutedEventArgs e)
+        private void OnBnSaveClicked (object sender, System.Windows.RoutedEventArgs e)
         {
-			Settings.Save();
+            Settings.Save( );
+            if (SettingsFinished != null)
+                SettingsFinished(this, true);
         }
-
     }
 }

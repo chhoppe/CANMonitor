@@ -3,24 +3,108 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:DB="clr-namespace:CANMonitor.DB;assembly=CANMonitor.DBAccess" xmlns:Properties="clr-namespace:CANMonitor.GUI.Properties" x:Class="CANMonitor.GUI.SettingsControl" 
+             xmlns:DB="clr-namespace:CANMonitor.DB;assembly=CANMonitor.DBAccess"
+             xmlns:core="clr-namespace:CANMonitor.Core;assembly=CANMonitor.Core"
+             xmlns:Properties="clr-namespace:CANMonitor.GUI.Properties"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:Ports="clr-namespace:System.IO.Ports;assembly=System"
+             x:Class="CANMonitor.GUI.SettingsControl" 
              mc:Ignorable="d" 
-			 d:DataContext="{d:DesignInstance Type=DB:Settings, IsDesignTimeCreatable=True}"
+			 d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type DB:Settings}}"
              d:DesignHeight="300" d:DesignWidth="300" Loaded="ControlLoaded">
-
-	<DockPanel LastChildFill="False">
-		<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top">
-			<Label Content="Serial Port: "/>
-			<TextBox TextWrapping="Wrap" Text="{Binding COMPort}" HorizontalAlignment="Center"/>
-		</DockPanel>
-		<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top">
-			<Label Content="TemperatureUnit: "/>
-			<TextBox TextWrapping="Wrap" Text="{Binding TemperatureUnit}" HorizontalAlignment="Center"/>
-		</DockPanel>
-		<DockPanel Margin="0" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+    <UserControl.Resources>
+        <core:EnumDisplayer Type="{x:Type Ports:Parity}" x:Key="parityEnum">
+            <core:EnumDisplayEntry EnumValue="None" DisplayString="None"/>
+            <core:EnumDisplayEntry EnumValue="Even" DisplayString="Even"/>
+            <core:EnumDisplayEntry EnumValue="Mark" DisplayString="Mark"/>
+            <core:EnumDisplayEntry EnumValue="Odd" DisplayString="Odd"/>
+            <core:EnumDisplayEntry EnumValue="Space" DisplayString="Space"/>
+        </core:EnumDisplayer>
+        <core:EnumDisplayer Type="{x:Type Ports:StopBits}" x:Key="stopBitsEnum">
+            <core:EnumDisplayEntry EnumValue="None" DisplayString="None"/>
+            <core:EnumDisplayEntry EnumValue="One" DisplayString="One"/>
+            <core:EnumDisplayEntry EnumValue="OnePointFive" DisplayString="OnePointFive"/>
+            <core:EnumDisplayEntry EnumValue="Two" DisplayString="Two"/>
+        </core:EnumDisplayer>
+        <System:Double x:Key="LabelWidth">128</System:Double>
+        <Thickness x:Key="RowMargin">2,2,0,0</Thickness>
+        <SolidColorBrush x:Key="TabBG" Color="#FFE5E5E5"/>
+    </UserControl.Resources>
+	<DockPanel>
+		<DockPanel HorizontalAlignment="Right" DockPanel.Dock="Bottom">
 			<Button x:Name="BnRevert" Content="Revert" VerticalAlignment="Top" Margin="8,0,0,0" Padding="4,1" Click="OnBnRevertClicked"/>
 			<Button x:Name="BnDefaults" Content="Load Defaults" VerticalAlignment="Top" Margin="8,0,0,0" Padding="4,1" Click="OnBnDefaultsClicked"/>
 			<Button x:Name="BnSave" Content="Save" VerticalAlignment="Top" Margin="8,0,0,0" Padding="4,1" IsDefault="True" Click="OnBnSaveClicked"/>
 		</DockPanel>
+		<TabControl DockPanel.Dock="Top">
+			<TabItem Header="Setup">
+				<DockPanel LastChildFill="False" Background="{DynamicResource TabBG}">
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Serial Port: " Width="{DynamicResource LabelWidth}"/>
+						<ComboBox Width="{DynamicResource LabelWidth}" ItemsSource="{Binding SerialPortList}" SelectedValue="{Binding SerialPort}"/>
+					</DockPanel>
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Baudrate: " Width="{DynamicResource LabelWidth}"/>
+						<TextBox TextWrapping="Wrap" Text="{Binding SerialPortBaudrate}" HorizontalAlignment="Center" Width="{DynamicResource LabelWidth}"/>
+					</DockPanel>
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Datenbits: " Width="{DynamicResource LabelWidth}"/>
+						<TextBox TextWrapping="Wrap" Text="{Binding SerialPortDatenbits}" HorizontalAlignment="Center" Width="{DynamicResource LabelWidth}"/>
+					</DockPanel>
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Parity: " Width="{DynamicResource LabelWidth}"/>
+						<ComboBox Width="{DynamicResource LabelWidth}" ItemsSource="{Binding DisplayNames, Source={StaticResource parityEnum}}" SelectedValue="{Binding SerialPortParity, Converter={StaticResource parityEnum}}"/>
+					</DockPanel>
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Stop bits: " Width="{DynamicResource LabelWidth}"/>
+						<ComboBox Width="{DynamicResource LabelWidth}" ItemsSource="{Binding DisplayNames, Source={StaticResource stopBitsEnum}}" SelectedValue="{Binding SerialPortStopBits, Converter={StaticResource stopBitsEnum}}"/>
+					</DockPanel>
+				</DockPanel>
+			</TabItem>
+			<TabItem Header="Temperature">
+				<DockPanel Background="{DynamicResource TabBG}" LastChildFill="False">
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Unit: " Width="{DynamicResource LabelWidth}"/>
+						<ComboBox Width="{DynamicResource LabelWidth}" SelectedValue="{Binding TemperatureUnit}">
+							<System:String>Celsius</System:String>
+							<System:String>Fahrenheit</System:String>
+							<System:String>Kelvin</System:String>
+						</ComboBox>
+					</DockPanel>
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Lower Threshold: " Width="{DynamicResource LabelWidth}"/>
+						<TextBox TextWrapping="Wrap" Text="{Binding TemperatureThresholdLower}" HorizontalAlignment="Center" Width="{DynamicResource LabelWidth}"/>
+					</DockPanel>
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Upper Threshold: " Width="{DynamicResource LabelWidth}"/>
+						<TextBox TextWrapping="Wrap" Text="{Binding TemperatureThresholdUpper}" HorizontalAlignment="Center" Width="{DynamicResource LabelWidth}"/>
+					</DockPanel>
+				</DockPanel>
+			</TabItem>
+			<TabItem Header="Voltage">
+				<DockPanel Background="{DynamicResource TabBG}" LastChildFill="False">
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Lower Threshold: " Width="{DynamicResource LabelWidth}"/>
+						<TextBox TextWrapping="Wrap" Text="{Binding VoltageThresholdLower}" HorizontalAlignment="Center" Width="{DynamicResource LabelWidth}"/>
+					</DockPanel>
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Upper Threshold: " Width="{DynamicResource LabelWidth}"/>
+						<TextBox TextWrapping="Wrap" Text="{Binding VoltageThresholdUpper}" HorizontalAlignment="Center" Width="{DynamicResource LabelWidth}"/>
+					</DockPanel>
+				</DockPanel>
+			</TabItem>
+			<TabItem Header="Current" >
+				<DockPanel Background="{DynamicResource TabBG}" LastChildFill="False">
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Lower Threshold: " Width="{DynamicResource LabelWidth}"/>
+						<TextBox TextWrapping="Wrap" Text="{Binding CurrentThresholdLower}" HorizontalAlignment="Center" Width="{DynamicResource LabelWidth}"/>
+					</DockPanel>
+					<DockPanel LastChildFill="False" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="{DynamicResource RowMargin}">
+						<Label Content="Upper Threshold: " Width="{DynamicResource LabelWidth}"/>
+						<TextBox TextWrapping="Wrap" Text="{Binding CurrentThresholdUpper}" HorizontalAlignment="Center" Width="{DynamicResource LabelWidth}"/>
+					</DockPanel>
+				</DockPanel>
+			</TabItem>
+		</TabControl>
 	</DockPanel>
 </UserControl>

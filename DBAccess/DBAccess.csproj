@@ -43,15 +43,22 @@
     <Compile Include="Class1.cs" />
     <Compile Include="DataStructure\DataValue.cs" />
     <Compile Include="DataStructure\DataValueTypes.cs" />
+    <Compile Include="DataStructure\TableData.cs" />
+    <Compile Include="DataStructure\TableSettings.cs" />
     <Compile Include="DataStructure\ValueVoltage.cs" />
     <Compile Include="DataStructure\ValueCurrent.cs" />
     <Compile Include="DataStructure\ValueGeneral.cs" />
-    <Compile Include="DataStructure\TableData.cs" />
+    <Compile Include="DataStructure\TableData2.cs" />
     <Compile Include="DataStructure\ValueTemperature.cs" />
+    <Compile Include="DatabaseManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Settings.cs" />
+    <Compile Include="SQLite\SQLite.cs" />
+    <Compile Include="SQLite\SQLiteAsync.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
