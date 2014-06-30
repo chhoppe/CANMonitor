@@ -1,0 +1,28 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:DB="clr-namespace:CANMonitor.DB.DataStructure;assembly=CANMonitor.DBAccess" 
+			 xmlns:Properties="clr-namespace:CANMonitor.GUI.Properties" 
+             xmlns:Core="clr-namespace:CANMonitor.Core;assembly=CANMonitor.Core" x:Class="CANMonitor.GUI.DataValueControl" 
+             mc:Ignorable="d" 
+			 d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type DB:DataValue}}"
+             d:DesignHeight="100" d:DesignWidth="300">
+	<UserControl.Resources>
+		<Core:DataValueToValueConverter x:Key="DataValueToValueConverter"/>
+		<Core:DateTimeToDelayConverter x:Key="DateTimeToDelayConverter"/>
+		<Core:DataValueTypeToBackgroundConverter x:Key="DataValueTypeToBackgroundConverter"/>
+	</UserControl.Resources>
+	<Border Background="{Binding Type, Converter={StaticResource DataValueTypeToBackgroundConverter}, Mode=OneWay}" BorderThickness="4" BorderBrush="Black" CornerRadius="4">
+		<DockPanel>
+			<DockPanel Margin="4,4,4,0" DockPanel.Dock="Top">
+				<TextBlock Text="{Binding Name}" VerticalAlignment="Top"/>
+				<TextBlock Text="{Binding TimeStamp, Converter={StaticResource DateTimeToDelayConverter}}" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+			</DockPanel>
+			<DockPanel Margin="4,4,0,0">
+				<TextBlock Text="{Binding Value.DoubleValue, Converter={StaticResource DataValueToValueConverter}}" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Right" DockPanel.Dock="Top"/>
+			</DockPanel>
+		</DockPanel>
+	</Border>
+</UserControl>

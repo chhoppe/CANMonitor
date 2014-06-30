@@ -1,8 +1,11 @@
-﻿<Window x:Class="CANMonitor.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:GUI="clr-namespace:CANMonitor.GUI" x:Class="CANMonitor.MainWindow"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+	<Grid>
         
-    </Grid>
+		<GUI:SettingsControl Margin="0"/>
+        
+	</Grid>
 </Window>

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LibShared.Crash;
+using System;
 using System.Windows;
-using LibShared.Crash;
 
 namespace CANMonitor
 {
@@ -14,6 +9,7 @@ namespace CANMonitor
     /// </summary>
     public partial class App : Application
     {
+        public static CANMonitor.DB.Settings Settings;
 
         public App ( )
             : base( )
@@ -25,7 +21,7 @@ namespace CANMonitor
                 CrashReporter.ShowMsgBox( );
                 Application.Current.Shutdown( );
             }
-
+            Settings = new DB.Settings(Dispatcher);
         }
 
         /// <summary>
