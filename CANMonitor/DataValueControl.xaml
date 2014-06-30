@@ -14,14 +14,14 @@
 		<Core:DateTimeToDelayConverter x:Key="DateTimeToDelayConverter"/>
 		<Core:DataValueTypeToBackgroundConverter x:Key="DataValueTypeToBackgroundConverter"/>
 	</UserControl.Resources>
-	<Border Background="{Binding Type, Converter={StaticResource DataValueTypeToBackgroundConverter}, Mode=OneWay}" BorderThickness="4" BorderBrush="Black" CornerRadius="4">
-		<DockPanel>
-			<DockPanel Margin="4,4,4,0" DockPanel.Dock="Top">
+	<Border x:Name="BorderEle" Background="{Binding Type, Converter={StaticResource DataValueTypeToBackgroundConverter}, Mode=OneWay}" BorderThickness="4" BorderBrush="Black" CornerRadius="4">
+		<DockPanel LastChildFill="False">
+			<DockPanel Margin="4,2,4,0" DockPanel.Dock="Top">
 				<TextBlock Text="{Binding Name}" VerticalAlignment="Top"/>
-				<TextBlock Text="{Binding TimeStamp, Converter={StaticResource DateTimeToDelayConverter}}" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+				<TextBlock Text="{Binding TimeStamp, Converter={StaticResource DateTimeToDelayConverter}}" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="8"/>
 			</DockPanel>
-			<DockPanel Margin="4,4,0,0">
-				<TextBlock Text="{Binding Value.DoubleValue, Converter={StaticResource DataValueToValueConverter}}" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Right" DockPanel.Dock="Top"/>
+			<DockPanel Margin="4,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Center">
+				<TextBlock Text="{Binding Value, Converter={StaticResource DataValueToValueConverter}}" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Right" DockPanel.Dock="Top"/>
 			</DockPanel>
 		</DockPanel>
 	</Border>

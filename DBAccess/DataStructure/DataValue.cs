@@ -6,9 +6,15 @@
         {}
         public DataValue(System.UInt32 pID, string pName, ValueGeneral pValue)
             : this(pID, pName, System.DateTime.Now, pValue)
-        {}
+        {
+        }
         public DataValue(System.UInt32 pID, string pName, System.DateTime pTimeStamp, ValueGeneral pValue)
-        {}
+        {
+            ID = pID;
+            Name = pName;
+            Value = pValue;
+            TimeStamp = pTimeStamp;
+        }
         public System.UInt32 ID
         {
             get;

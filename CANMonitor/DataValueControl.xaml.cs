@@ -10,7 +10,7 @@ namespace CANMonitor.GUI
         public DataValueControl ( )
         {
             InitializeComponent( );
-
+            
         }
     }
 }

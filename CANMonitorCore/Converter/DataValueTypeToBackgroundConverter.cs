@@ -4,7 +4,7 @@ using System.Windows.Data;
 namespace CANMonitor.Core
 {
 
-    [ValueConversion(typeof(CANMonitor.DB.DataStructure.DataValueTypes), typeof(System.Windows.Media.Color))]
+    [ValueConversion(typeof(CANMonitor.DB.DataStructure.DataValueTypes), typeof(System.Windows.Media.Brush))]
     public class DataValueTypeToBackgroundConverter : IValueConverter
     {
         #region IValueConverter Member
@@ -18,15 +18,15 @@ namespace CANMonitor.Core
             switch (ltype)
             {
                 case CANMonitor.DB.DataStructure.DataValueTypes.None:
-                    return System.Windows.Media.Color.FromRgb(255, 0, 0);
+                    return System.Windows.Media.Brushes.Red;
                 case CANMonitor.DB.DataStructure.DataValueTypes.Voltage:
-                    return System.Windows.Media.Color.FromRgb(0, 0, 64);
+                    return System.Windows.Media.Brushes.LightBlue;
                 case CANMonitor.DB.DataStructure.DataValueTypes.Temperature:
-                    return System.Windows.Media.Color.FromRgb(0, 64, 0);
+                    return System.Windows.Media.Brushes.LightGreen;
                 case CANMonitor.DB.DataStructure.DataValueTypes.Current:
-                    return System.Windows.Media.Color.FromRgb(64, 0, 0);
+                    return System.Windows.Media.Brushes.LightYellow;
                 default:
-                    return System.Windows.Media.Color.FromRgb(255, 0, 0);
+                    return System.Windows.Media.Brushes.Red;
             }
         }
 

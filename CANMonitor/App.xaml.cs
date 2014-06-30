@@ -9,7 +9,9 @@ namespace CANMonitor
     /// </summary>
     public partial class App : Application
     {
-        public static CANMonitor.DB.Settings Settings;
+        public static CANMonitor.DB.Settings Settings
+        {get {return CANMonitor.DB.Settings.GlobalSettings;}
+        }
 
         public App ( )
             : base( )
@@ -21,7 +23,7 @@ namespace CANMonitor
                 CrashReporter.ShowMsgBox( );
                 Application.Current.Shutdown( );
             }
-            Settings = new DB.Settings(Dispatcher);
+            CANMonitor.DB.Settings.GlobalSettings = new DB.Settings(Dispatcher);
         }
 
         /// <summary>

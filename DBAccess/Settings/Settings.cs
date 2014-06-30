@@ -10,7 +10,7 @@ namespace CANMonitor.DB
         /// </summary>
         private bool massValueChanges = false;
         private System.Windows.Threading.Dispatcher _Dispatcher;
-
+        static public Settings GlobalSettings;
         private string _COMPort;
         private string _TemperatureUnit;
 
@@ -78,7 +78,6 @@ namespace CANMonitor.DB
             LoadDefaults( );
             Load( );
         }
-
         /// <summary>
         /// Constructor
         /// </summary>

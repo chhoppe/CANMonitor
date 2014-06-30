@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Collections;
 
-namespace WorkingTimeLib
+namespace CANMonitor.Core
 {
     public class SortedBindingList<T> : BindingList<T>
     {

@@ -9,11 +9,11 @@ namespace CANMonitor.DB.DataStructure
         {
             get
             {
-                return _value + 273;
+                return _value - 273;
             }
             set
             {
-                _value = value - 273;
+                _value = value + 273;
             }
         }
         public double Kelvin
@@ -31,11 +31,11 @@ namespace CANMonitor.DB.DataStructure
         {
             get
             {
-                return (Celsius / (5 / 9)) + 32;
+                return _value * 1.8 - 459.67;
             }
             set
             {
-                _value = 5 / 9 * (value - 32);
+                _value = (_value + 459.67) * 5 / 9;
             }
         }
         #endregion

@@ -1,11 +1,22 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:GUI="clr-namespace:CANMonitor.GUI" x:Class="CANMonitor.MainWindow"
-        Title="MainWindow" Height="350" Width="525">
-	<Grid>
-        
-		<GUI:SettingsControl Margin="0"/>
-        
-	</Grid>
+        xmlns:GUI="clr-namespace:CANMonitor.GUI" xmlns:Core="clr-namespace:CANMonitor.Core;assembly=CANMonitor.Core" x:Name="CANMonitor" x:Class="CANMonitor.MainWindow"
+        Title="CAN Monitor">
+	<Window.Resources>
+		<DataTemplate x:Key="DataValueTemplate">
+			<Grid >
+				<GUI:DataValueControl HorizontalAlignment="Left" Width="150" Height="50" Margin="0,0,0,0" VerticalAlignment="Top"/>
+			</Grid>
+		</DataTemplate>
+		<ItemsPanelTemplate x:Key="DataValuePanelTemplate">
+			<WrapPanel MaxWidth="{Binding ActualWidth, ElementName=myDataStackPanel}" MaxHeight="{Binding ActualHeight, ElementName=myDataStackPanel}" IsItemsHost="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Orientation="Horizontal"/>
+		</ItemsPanelTemplate>
+	</Window.Resources>
+	<StackPanel x:Name="myDataStackPanel" HorizontalAlignment="Left" VerticalAlignment="Top" Height="{Binding ActualHeight, ElementName=CANMonitor}" Width="{Binding ActualWidth, ElementName=CANMonitor}">
+		<StackPanel.DataContext>
+			<Core:DataValueList/>
+		</StackPanel.DataContext>
+		<ListBox ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource DataValueTemplate}" ItemsPanel="{DynamicResource DataValuePanelTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Top"/>
+	</StackPanel>
 </Window>
