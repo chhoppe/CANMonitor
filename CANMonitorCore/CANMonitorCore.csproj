@@ -47,6 +47,7 @@
     <Compile Include="Converter\DataValueToValueConverter.cs" />
     <Compile Include="Converter\DataValueTypeToBackgroundConverter.cs" />
     <Compile Include="Converter\DateTimeToDelayConverter.cs" />
+    <Compile Include="Converter\DataValueTypeToThresholdHighlightConverter.cs" />
     <Compile Include="DataValueList.cs" />
     <Compile Include="EnumGUISupport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

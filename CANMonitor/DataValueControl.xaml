@@ -10,18 +10,19 @@
 			 d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type DB:DataValue}}"
              d:DesignHeight="100" d:DesignWidth="300">
 	<UserControl.Resources>
+		<Core:DataValueTypeToThresholdHighlightConverter x:Key="DataValueTypeToThresholdHighlightConverter"/>
 		<Core:DataValueToValueConverter x:Key="DataValueToValueConverter"/>
 		<Core:DateTimeToDelayConverter x:Key="DateTimeToDelayConverter"/>
 		<Core:DataValueTypeToBackgroundConverter x:Key="DataValueTypeToBackgroundConverter"/>
 	</UserControl.Resources>
-	<Border x:Name="BorderEle" Background="{Binding Type, Converter={StaticResource DataValueTypeToBackgroundConverter}, Mode=OneWay}" BorderThickness="4" BorderBrush="Black" CornerRadius="4">
+	<Border x:Name="BorderEle" Background="{Binding Type, Converter={StaticResource DataValueTypeToBackgroundConverter}, Mode=OneWay}" BorderThickness="4" BorderBrush="{Binding Value, Converter={StaticResource DataValueTypeToThresholdHighlightConverter}}" CornerRadius="4">
 		<DockPanel LastChildFill="False">
 			<DockPanel Margin="4,2,4,0" DockPanel.Dock="Top">
 				<TextBlock Text="{Binding Name}" VerticalAlignment="Top"/>
 				<TextBlock Text="{Binding TimeStamp, Converter={StaticResource DateTimeToDelayConverter}}" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="8"/>
 			</DockPanel>
 			<DockPanel Margin="4,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Center">
-				<TextBlock Text="{Binding Value, Converter={StaticResource DataValueToValueConverter}}" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Right" DockPanel.Dock="Top"/>
+				<TextBlock Text="{Binding Value, Converter={StaticResource DataValueToValueConverter}}" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Right" DockPanel.Dock="Top" Foreground="{Binding Value, Converter={StaticResource DataValueTypeToThresholdHighlightConverter}}"/>
 			</DockPanel>
 		</DockPanel>
 	</Border>
